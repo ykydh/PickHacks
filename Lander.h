@@ -1,25 +1,35 @@
 #ifndef LANDER_H_
 #define LANDER_H_
-#include<list>
-class lander{
-  public:
-    //getter
-    double getVelocity(){return velocity;};
-    double getFuel(){return fuel;};
-    double getAngle(){return angle;};
-    bool   getEngineState(){return engine;};
-    std::list<int> getPosition(){return currentPosition;};
-    std::list<int> getPosition(){return currentPosition;};
-    //setter
-  private:
-    std::list<int> currentPosition={0,0};
-    std::list<int> previousPosition={0,0};
 
-    double velocity;
-    double fuel;
-    double angle;
+#include <utility>  // For std::pair
 
-    bool engine;
-    
+class Lander {
+public:
+    // Getters
+    double getVelocity() const { return velocity; }
+    double getFuel() const { return fuel; }
+    double getAngle() const { return angle; }
+    bool getEngineState() const { return engine; }
+    std::pair<int, int> getCurrentPosition() const { return currentPosition; }
+    std::pair<int, int> getPreviousPosition() const { return previousPosition; }
+
+    // Setters
+    void setVelocity(double x) { velocity = x; }
+    void setFuel(double y) { fuel = y; }
+    void setAngle(double z) { angle = z; }
+    void setEngineState(bool j) { engine = j; }
+    void setCurrentPosition(int a, int b) { currentPosition = {a, b}; }
+    void setPreviousPosition(int c, int d) { previousPosition = {c, d}; }
+
+private:
+    std::pair<int, int> currentPosition = {0, 0};
+    std::pair<int, int> previousPosition = {0, 0};
+
+    double velocity = 0.0;
+    double fuel = 100.0;
+    double angle = 0.0;
+
+    bool engine = false;
 };
-#endif LANDER_H_
+
+#endif // LANDER_H_
