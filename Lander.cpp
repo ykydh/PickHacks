@@ -1,6 +1,8 @@
 #include "Lander.h"
+#include <cmath>
 
-std::pair<double, double>calculateVelocity(std::pair<int, int> current,std::pair<int, int> previous){
+const double g = 9.81;
+std::pair<double, double>calculateVelocity(std::pair<int, int> current,std::pair<int, int> previous, int deltaT){
     std::pair<double, double>currentVer;
     //set deltaT
     int deltaT=0;
@@ -8,13 +10,23 @@ std::pair<double, double>calculateVelocity(std::pair<int, int> current,std::pair
     int currentY = current.second;
     int previousX = previous.first;
     int previousY = previous.second;
-    double vx,vy;
     
-    vx=(currentX-previousX)/deltaT;
-    vy=(currentY-previousY)/deltaT;
+    double vx = (currentX-previousX)/deltaT;
+    double vy = static_cast<double>(currentY - previousY) / deltaT + g * deltaT;
  
     currentVer.first=vx;
     currentVer.second=vy;
 
     return currentVer;
+}
+
+double refreshRate(std::pair<double, double> velocity) {
+    double vx = velocity.first;
+    double vy = velocity.second;
+    
+    double v_magnitude = sqrt(vx * vx + vy * vy);
+    
+    double fps = v_magnitude * 0.2;
+
+    return fps;
 }
