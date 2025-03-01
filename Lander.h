@@ -6,7 +6,7 @@
 class Lander {
 public:
     //Constructor
-    Lander(){velocity};
+    
     // Getters
     double getFuel() const { return fuel; }
     double getAngle() const { return angle; }
