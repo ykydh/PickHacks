@@ -2,20 +2,19 @@
 #include <cmath>
 
 const double g = 9.81;
-std::pair<double, double>calculateVelocity(std::pair<int, int> current,std::pair<int, int> previous, int deltaT){
-    std::pair<double, double>currentVer;
-    //set deltaT
-    int deltaT=0;
+std::pair<double, double> calculateVelocity(std::pair<int, int> current, std::pair<int, int> previous, int deltaT) {
+    std::pair<double, double> currentVer;
+
     int currentX = current.first;
     int currentY = current.second;
     int previousX = previous.first;
     int previousY = previous.second;
     
-    double vx = (currentX-previousX)/deltaT;
+    double vx = static_cast<double>(currentX - previousX) / deltaT;
     double vy = static_cast<double>(currentY - previousY) / deltaT + g * deltaT;
  
-    currentVer.first=vx;
-    currentVer.second=vy;
+    currentVer.first = vx;
+    currentVer.second = vy;
 
     return currentVer;
 }

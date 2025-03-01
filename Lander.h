@@ -23,8 +23,9 @@ public:
     void setPreviousPosition(int c, int d) { previousPosition = {c, d}; }
     void setVelocity(double x, double y) { velocity = {x,y}; }
     //members
-    std::pair<double, double>calculateVelocity(std::pair<int, int> current,std::pair<int, int> previous);
+    std::pair<double, double>calculateVelocity(std::pair<int, int> current,std::pair<int, int> previous, int deltaT);
 private:
+    double refreshRate(std::pair<double, double> velocity);
     std::pair<int, int> currentPosition = {0, 0};
     std::pair<int, int> previousPosition = {0, 0};
     std::pair<double, double> velocity = {0, 0};
