@@ -3,23 +3,32 @@
 #include "Ground.h"
 #include <iostream>
 
+int numRows= 32;
+int numColumns = 32;
+
 int main(){
-  char modeInp;
+  char modeInp = 'N';
   std::cout<<"--------Moon Lander--------"<<std::endl;
   std::cout<<"Land a landing pod safely to the lunar surface"<<std::endl;
+ 
+  do{
+    LandScape landscape;
+    Lander lander;
+    do{
+      
 
-  int numRows= 32;
-  int numColumns = 32;
+      landscape.create_grid(numRows, numColumns);
 
-  LandScape landscape;
-  Lander lander;
+      landscape.random_fill_terrain();
 
-  landscape.create_grid(numRows, numColumns);
+      landscape.print_grid();
 
-  landscape.random_fill_terrain();
+      landscape.delete_grid();
+    }while(!lander.getCrash());
+    std::cout<<"New Game: N"<<std::endl;
+    std::cout<<"Quit: Q"<<std::endl;
+    std::cin>>modeInp; 
+  }while(modeInp != 'N');
 
-  landscape.print_grid();
-
-  landscape.delete_grid();
   return 0;
 }
