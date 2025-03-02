@@ -40,7 +40,6 @@ public:
 
         // Array to store the height of the mountain for each column
         int heights[cols];
-
         // Generate the initial random height for the first column
         heights[0] = rand() % (rows / 4) + (rows / 8);  // Lower heights between rows/8 and rows/4
 
