@@ -2,6 +2,7 @@
 #include "Lander.h"
 #include "Ground.h"
 #include <iostream>
+#include <cstdlib>
 
 int numRows= 32;
 int numColumns = 32;
@@ -21,6 +22,7 @@ int main(){
       landscape.print_grid();
 
       landscape.delete_grid();
+      system("clear");
     }while(!landscape.lander.getCrash());
     std::cout<<"New Game: N"<<std::endl;
     std::cout<<"Quit: Q"<<std::endl;
