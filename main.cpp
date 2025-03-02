@@ -13,13 +13,11 @@ int main(){
   
   do{
     LandScape landscape;
+    landscape.create_grid(numRows, numColumns);
+    landscape.random_fill_terrain();
     do{
+      landscape.updateLander();
       
-
-      landscape.create_grid(numRows, numColumns);
-
-      landscape.random_fill_terrain();
-
       landscape.print_grid();
 
       landscape.delete_grid();
