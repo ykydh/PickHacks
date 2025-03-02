@@ -62,3 +62,4 @@ void LandScape::updateLander()
  //curpos =lander.getCurrentPosition();
  symbols[curpos.first][curpos.second] = 'A';
 }
+ 

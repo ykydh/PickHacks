@@ -5,8 +5,8 @@ CXXFLAGS = -Wall -Wextra -std=c++17
 # Executable name
 TARGET = lander_game
 
-# Source and object files
-SRCS = main.cpp Lander.cpp Lander.h LandScape.cpp LandScape.h Ground.cpp Ground.p
+# Source and object files (DO NOT include .h files)
+SRCS = main.cpp Lander.cpp LandScape.cpp Ground.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 # Default rule: build the executable
@@ -23,4 +23,3 @@ $(TARGET): $(OBJS)
 # Clean up generated files
 clean:
 	rm -f $(OBJS) $(TARGET)
-
