@@ -89,6 +89,19 @@ public:
 
         delete[] heights;
     }
+    void checkCollision(Lander& lander) {
+	int x = lander.getCurrentPosition().first;
+	int y = lander.getCurrentPosition().second;
+	for (int iy = y; iy < 3; iy++) {
+		for (int ix = x; x < 2; ix++) {
+			if (symbols[iy][ix] != ' ' && symbols[iy][ix] != symbols[x][y] && symbols[iy][ix] != symbols[x][y-1]) {
+				lander.setCrash(true);
+                return;
+			}
+		}
+	}
+	lander.setCrash(false);
+}
 };
 
 
