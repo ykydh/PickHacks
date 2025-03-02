@@ -1,4 +1,4 @@
-#include "Lander.h"
+/*#include "Lander.h"
 #include <cmath>
 
 const double g = 9.81;
@@ -28,4 +28,4 @@ double refreshRate(std::pair<double, double> velocity) {
     double fps = v_magnitude * 0.2;
 
     return fps;
-}
+}*/

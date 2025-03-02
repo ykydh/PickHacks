@@ -4,32 +4,33 @@
 #include "Lander.h"
 #include <ctime>
 #include <stdlib.h>
+#include <iostream>
 
 class LandScape {
 
 private:
-  int rows, cols;
-  char **symbols;
-  
+    int rows, cols;
+    char** symbols;
+
 public:
-  Lander lander;
+    //Lander lander;
 
-  void updateLander();
-  
-  LandScape() : rows(0), cols(0), symbols(nullptr) {}
+    void updateLander();
 
-  char **grid() { return symbols; } // FOR TESTING PURPOSES ONLY
-  const int &get_rows() const { return rows; }
-  const int &get_cols() const { return cols; }
+    LandScape() : rows(0), cols(0), symbols(nullptr) {}
 
-  void create_grid(int rows, int cols);
-  void fill_grid();
-  void delete_grid();
-  void print_grid() const;
+    char** grid() { return symbols; } // FOR TESTING PURPOSES ONLY
+    const int& get_rows() const { return rows; }
+    const int& get_cols() const { return cols; }
 
-  const LandScape &operator=(const LandScape &rhs);
-  LandScape(const LandScape &source);
-  ~LandScape();
+    void create_grid(int rows, int cols);
+    void fill_grid();
+    void delete_grid();
+    void print_grid() const;
+
+    const LandScape& operator=(const LandScape& rhs);
+    LandScape(const LandScape& source);
+    ~LandScape();
 
     void random_fill_terrain() {
         time_t seed;
@@ -38,44 +39,55 @@ public:
         if (symbols == nullptr)
             return;
 
-        // Array to store the height of the mountain for each column
-        int heights[cols];
+        int* heights = new int[cols];
+        heights[0] = rand() % (rows / 4) + (rows / 8);
 
-        // Generate the initial random height for the first column
-        heights[0] = rand() % (rows / 4) + (rows / 8);  // Lower heights between rows/8 and rows/4
-
-        // Smoothly generate the height of mountains across columns
         for (int c = 1; c < cols; c++) {
-            // The height of the current column is based on the previous column
-            int height_variation = rand() % 5 - 2;  // Small variation between -2 and +2
+            int height_variation = rand() % 5 - 2;
             heights[c] = heights[c - 1] + height_variation;
-
-            // Clamp the height to avoid it going out of bounds
-            if (heights[c] < rows / 8) heights[c] = rows / 8;  // Minimum height is lower
-            if (heights[c] > rows / 4 + rows / 8) heights[c] = rows / 4 + rows / 8;  // Maximum height is lower too
+            if (heights[c] < rows / 8) heights[c] = rows / 8;
+            if (heights[c] > rows / 4 + rows / 8) heights[c] = rows / 4 + rows / 8;
         }
 
-        // Fill the grid based on the generated mountain heights
+        // Randomly determine a landing zone position
+        int lz_start = rand() % (cols - 2); // Ensure at least 3 spaces available
+        int lz_height = heights[lz_start];
+
+        // Ensure the landing zone is level
+        heights[lz_start + 1] = lz_height;
+        heights[lz_start + 2] = lz_height;
+
         for (int c = 0; c < cols; c++) {
             for (int r = 0; r < rows; r++) {
                 if (r < rows - heights[c]) {
-                    // Everything above the mountain is whitespace
                     symbols[r][c] = ' ';
-                } else {
-                    // Randomly assign terrain characters below mountain height
-                    int terrain_type = rand() % 100;
-                    if (terrain_type < 50) {
-                        symbols[r][c] = '.';  // Grass or lower elevation
-                    } else if (terrain_type < 70) {
-                        symbols[r][c] = '~';  // Water or valley areas
-                    } else if (terrain_type < 90) {
-                        symbols[r][c] = '#';  // Rocky regions of the mountains
-                    } else {
-                        symbols[r][c] = '^';  // Peaks or upper rocky areas
+                }
+                else {
+                    if (c >= lz_start && c <= lz_start + 2 && heights[c] == lz_height) {
+                        symbols[r][c] = '_'; // Landing zone
+                    }
+                    else {
+                        int terrain_type = rand() % 100;
+                        if (r >= rows - heights[c]) {
+                            if (terrain_type < 50) {
+                                symbols[r][c] = '.'; // Plains
+                            }
+                            else if (terrain_type < 70) {
+                                symbols[r][c] = '~'; // Water
+                            }
+                            else if (terrain_type < 90) {
+                                symbols[r][c] = '#'; // Mountain
+                            }
+                            else {
+                                symbols[r][c] = '^'; // Steep Mountain
+                            }
+                        }
                     }
                 }
             }
         }
+
+        delete[] heights;
     }
 };
 
