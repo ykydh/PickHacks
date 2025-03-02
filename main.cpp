@@ -10,10 +10,9 @@ int main(){
   char modeInp = 'N';
   std::cout<<"--------Moon Lander--------"<<std::endl;
   std::cout<<"Land a landing pod safely to the lunar surface"<<std::endl;
- 
+  
   do{
     LandScape landscape;
-    Lander lander;
     do{
       
 
@@ -24,7 +23,7 @@ int main(){
       landscape.print_grid();
 
       landscape.delete_grid();
-    }while(!lander.getCrash());
+    }while(!landscape.lander.getCrash());
     std::cout<<"New Game: N"<<std::endl;
     std::cout<<"Quit: Q"<<std::endl;
     std::cin>>modeInp; 

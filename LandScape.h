@@ -1,6 +1,7 @@
 #ifndef LANDSCAPE_H
 #define LANDSCAPE_H
 
+#include "Lander.h"
 #include <ctime>
 #include <stdlib.h>
 
@@ -9,8 +10,12 @@ class LandScape {
 private:
   int rows, cols;
   char **symbols;
-
+  
 public:
+  Lander lander;
+
+  void updateLander();
+  
   LandScape() : rows(0), cols(0), symbols(nullptr) {}
 
   char **grid() { return symbols; } // FOR TESTING PURPOSES ONLY
@@ -73,5 +78,7 @@ public:
         }
     }
 };
+
+
 
 #endif

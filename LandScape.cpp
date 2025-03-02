@@ -55,3 +55,8 @@ LandScape::~LandScape() {
   if (symbols != nullptr)
     delete_grid();
 }
+
+void updateLander()
+{
+  
+}
