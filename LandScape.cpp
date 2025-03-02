@@ -56,7 +56,9 @@ LandScape::~LandScape() {
     delete_grid();
 }
 
-void updateLander()
+void LandScape::updateLander()
 {
-  
+ std::pair<int, int>curpos;
+ curpos =lander.getCurrentPosition();
+ symbols[curpos.first][curpos.second] = 'A';
 }
