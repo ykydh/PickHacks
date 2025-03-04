@@ -1,4 +1,4 @@
-/*#ifndef LANDER_H_
+#ifndef LANDER_H_
 #define LANDER_H_
 
 #include <utility>  // For std::pair
@@ -6,7 +6,7 @@
 class Lander {
 public:
     //Constructor
-    Lander(){fuel = 100; angle = 0.0; currentPosition = std::make_pair(0, 0); engine = false; velocity = std::make_pair(2,0); crash = false;}
+    Lander(){fuel = 20; angle = 0.0; currentPosition = std::make_pair(0, 16); engine = false; velocity = std::make_pair(2,0); crash = false;}
     // Getters
     double getFuel() const { return fuel; }
     double getAngle() const { return angle; }
@@ -36,8 +36,8 @@ private:
     double fuel;
     double angle;
 
-    bool engine;
+    int engine; //0:No propulsion 1:^ 2:> 3:
     bool crash;
 };
 
-#endif*/
+#endif

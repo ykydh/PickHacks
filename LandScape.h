@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <iostream>
 
+
 class LandScape {
 
 private:
@@ -13,7 +14,7 @@ private:
     char** symbols;
 
 public:
-    //Lander lander;
+    Lander lander;
 
     void updateLander();
 

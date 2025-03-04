@@ -59,7 +59,7 @@ LandScape::~LandScape() {
 void LandScape::updateLander()
 {
  std::pair<int, int>curpos;
- //curpos =lander.getCurrentPosition();
+ curpos =lander.getCurrentPosition();
  symbols[curpos.first][curpos.second] = 'A';
 }
  
