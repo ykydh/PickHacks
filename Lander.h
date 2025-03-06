@@ -3,6 +3,8 @@
 
 #include <utility> // For std::pair
 
+enum propulsion { NO, LEFT, DOWNLEFT, UP, DOWNRIGHT, RIGHT };
+
 class Lander {
 public:
   // Constructor
@@ -42,7 +44,8 @@ public:
                     propulsion input);
 
 private:
-  double refreshRate(std::pair<double, double> velocity, double currentFPS, double minFPS = 30, double maxFPS = 60);
+  double refreshRate(std::pair<double, double> velocity, double currentFPS,
+                     double minFPS = 30, double maxFPS = 60);
   std::pair<int, int> currentPosition;
   std::pair<int, int> previousPosition;
   // grid per second

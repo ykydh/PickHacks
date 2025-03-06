@@ -1,8 +1,6 @@
 #include "Lander.h"
-#include <cmath>
 #include <algorithm>
-
-enum propulsion { NO, LEFT, DOWNLEFT, UP, DOWNRIGHT, RIGHT };
+#include <cmath>
 
 #define PI 3.14159265;
 
@@ -128,23 +126,27 @@ calculateVelocity(std::pair<int, int> currentPosition,
   return currentVer;
 }
 
-double refreshRate(std::pair<double, double> velocity, double currentFPS, double minFPS = 30, double maxFPS = 60) {
-    double vx = velocity.first;
-    double vy = velocity.second;
+double refreshRate(std::pair<double, double> velocity, double currentFPS,
+                   double minFPS = 30, double maxFPS = 60) {
+  double vx = velocity.first;
+  double vy = velocity.second;
 
-    // Calculate the magnitude of the velocity
-    double v_magnitude = sqrt(vx * vx + vy * vy);
+  // Calculate the magnitude of the velocity
+  double v_magnitude = sqrt(vx * vx + vy * vy);
 
-    // Define a scaling factor (adjust based on testing)
-    double scalingFactor = 0.2;  // Adjust this to control the responsiveness to velocity
-    double targetFPS = v_magnitude * scalingFactor;
+  // Define a scaling factor (adjust based on testing)
+  double scalingFactor =
+      0.2; // Adjust this to control the responsiveness to velocity
+  double targetFPS = v_magnitude * scalingFactor;
 
-    // Clamp the target FPS to a reasonable range
-    targetFPS = std::clamp(targetFPS, minFPS, maxFPS);
+  // Clamp the target FPS to a reasonable range
+  targetFPS = std::clamp(targetFPS, minFPS, maxFPS);
 
-    // Smooth transition (for example, use linear interpolation between current and target FPS)
-    double smoothingFactor = 0.1;  // You can adjust this value to control the smoothness of the transition
-    double newFPS = currentFPS + smoothingFactor * (targetFPS - currentFPS);
+  // Smooth transition (for example, use linear interpolation between current
+  // and target FPS)
+  double smoothingFactor = 0.1; // You can adjust this value to control the
+                                // smoothness of the transition
+  double newFPS = currentFPS + smoothingFactor * (targetFPS - currentFPS);
 
-    return newFPS;
+  return newFPS;
 }
